@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Специальные Задания</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+<header class="header">
+    <div class="logo">
+        <img src="http://127.0.0.1:9000/prog/bmstu_logo.png" alt="Логотип">
+    </div>
+    <nav class="nav">
+        <a href="/home">Задания</a>
+    </nav>
+</header>
+<main>
+    <h1>Выбранные Задания</h1>
+    <div class="task-list">
+        {{range .tasks}}
+        <div class="task-item">
+            <img src="{{.Image}}" alt="Задание {{.ID}}" width="150" height="150">
+            <div class="task-info">
+                <h2>{{.Title}}</h2>
+                <p>{{.Description}}</p>
+                <span class="hours">{{.Hours}} часов на выполнение</span>
+                <a href="/task/{{ .ID }}" style="text-decoration: none;" class="button12">Подробнее</a>
+            </div>
+
+            <div class="icon-wrapper">
+                <img class="small-icon" src="http://127.0.0.1:9000/prog/trash.png" alt="Иконка"  >
+
+            </div>
+        </div>
+
+        {{end}}
+    </div>
+</main>
+</body>
+</html>

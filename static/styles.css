@@ -10,13 +10,26 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #007bff;
+    background-color: #006CDC;
     padding: 10px 50px;
     color: white;
 }
+.floating-button {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 1000; /* Убедитесь, что кнопка отображается поверх других элементов */
+}
+
+.floating-button img {
+    width: 80px; /* Размер изображения */
+    height: 80px;
+    border-radius: 50%; /* Если хотите, чтобы кнопка была круглой */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Небольшая тень для улучшения видимости */
+}
 
 .logo img {
-    width: 100px;
+    width: 200px;
     height: auto;
 }
 .litle {
@@ -71,14 +84,14 @@ h1 {
 }
 
 .task-item {
+
     display: flex;
-    justify-content: center;
-    align-items: center;
     background-color: #f1f8ff;
     padding: 20px;
     border-radius: 10px;
     margin-left: 100px;
-
+    align-items: stretch; /* Устанавливает все элементы на одинаковую высоту */
+    margin-bottom: 20px;
 }
 
 
@@ -113,6 +126,7 @@ h1 {
     font-size: 16px;
     cursor: pointer;
     transition: 0.3s;
+    text-decoration: none;
 }
 .button12 {
     background-color: white;
@@ -123,8 +137,30 @@ h1 {
     font-size: 16px;
     cursor: pointer;
     transition: 0.3s;
+    text-decoration: none;
 }
 .task-info button:hover {
     background-color: #007bff;
     color: white;
+}
+.task-info {
+    flex-grow: 1;
+    padding-left: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Распределяет пространство между элементами */
+}
+.icon-wrapper {
+    display: flex;
+    align-items: center; /* Центрирует изображение по вертикали */
+    justify-content: center; /* Центрирует изображение по горизонтали, если нужно */
+    padding-left: 50px; /* Отступ в 50 пикселей слева от кнопки */
+}
+.icon-wrapper img{
+    width: 50px; /* Размер иконки */
+    height: 50px;
+}
+.small-icon {
+    width: 25px; /* Размер иконки */
+    height: 25px;
 }

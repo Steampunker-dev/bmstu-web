@@ -10,13 +10,13 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #007bff;
+    background-color: #006CDC;
     padding: 10px 50px;
     color: white;
 }
 
 .logo img {
-    width: 100px;
+    width: 200px;
     height: auto;
 }
 .litle {
@@ -114,6 +114,7 @@ h1 {
     font-size: 16px;
     cursor: pointer;
     transition: 0.3s;
+    text-decoration: none;
 }
 .button12 {
     background-color: white;
@@ -124,6 +125,7 @@ h1 {
     font-size: 16px;
     cursor: pointer;
     transition: 0.3s;
+    text-decoration: none;
 }
 .task-info button:hover {
     background-color: #007bff;
