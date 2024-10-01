@@ -1,11 +1,12 @@
-
 @import url('https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
-*{
+
+* {
     margin: 0;
     padding: 0;
     font-family: 'PT Sans', sans-serif;
     color: #000000;
 }
+
 .header {
     display: flex;
     justify-content: space-between;
@@ -19,15 +20,6 @@
     width: 200px;
     height: auto;
 }
-.litle {
-
-    font-weight: bold;
-    font-size: 20px;
-    letter-spacing: 0;
-    text-align: left; /* Default, additional options: center, right, justify */
-
-    color: #FFFFFF;
-}
 
 .nav a {
     margin-left: 20px;
@@ -40,29 +32,12 @@ main {
     padding: 20px 50px;
     background-color: white;
 }
-h2{
+
+h2 {
     font-weight: bold;
     font-size: 20px;
     letter-spacing: 0;
-    text-align: left; /* Default, additional options: center, right, justify */
-}
-h1 {
-    font-size: 32px;
-    text-align: center;
-}
-
-
-.search-bar {
-    text-align: center;
-    margin: 20px 0;
-}
-
-.search-bar input {
-    width: 60%;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    text-align: left;
 }
 
 .task-list {
@@ -73,30 +48,32 @@ h1 {
 
 .task-item {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
     background-color: #f1f8ff;
     padding: 20px;
     border-radius: 10px;
-    margin-left: 100px;
-
 }
 
-
 .task-item img {
-    width: 150px;
-    height: 150px;
+    width: 100%;
+    max-width: 550px;
+    height: auto;
     border-radius: 10px;
-    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+.task-info {
+    text-align: center;
 }
 
 .task-info h2 {
-    font-size: 20px;
-    margin: 0 0 10px;
+    font-size: 24px;
+    margin-bottom: 10px;
 }
 
 .task-info p {
-    margin: 0 0 10px;
+    margin-bottom: 10px;
     font-size: 16px;
 }
 
@@ -105,17 +82,6 @@ h1 {
     color: #555;
 }
 
-.task-info button {
-    background-color: white;
-    color: #007bff;
-    border: 1px solid #007bff;
-    border-radius: 5px;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: 0.3s;
-    text-decoration: none;
-}
 .button12 {
     background-color: white;
     color: #007bff;
@@ -127,7 +93,14 @@ h1 {
     transition: 0.3s;
     text-decoration: none;
 }
-.task-info button:hover {
+
+.button12:hover {
     background-color: #007bff;
     color: white;
+}
+.sup_class1 {
+    text-align: center;
+}
+.sup_class2 {
+    margin-top: 20px; /* Добавляет дополнительный отступ */
 }

@@ -12,13 +12,13 @@
             <img src="http://127.0.0.1:9000/prog/bmstu_logo.png" alt="Логотип">
         </div>
         <nav class="nav">
-            <a href="/home">Задания</a>
+            <a href="/tasks">Задания</a>
         </nav>
     </header>
     <main>
         <h1>Задания</h1>
-        <form method="GET" action="/home" class="search-bar">
-            <input type="text" name="search" placeholder="Поиск заданий" value="{{.searchQuery}}">
+        <form method="GET" action="/tasks" class="search-bar">
+            <input type="text" name="find_task" placeholder="Поиск заданий" value="{{.searchQuery}}">
             <button type="submit" class="button12">Поиск</button>
         </form>
 
@@ -26,11 +26,10 @@
 <div class="task-list">
     {{range .tasks}}
     <div class="task-item">
-        <img src="{{.Image}}" alt="Задание {{.ID}}" width="150" height="150">
+        <img src="{{.Image}}" alt="Задание {{.ID}}" width="250" height="150">
         <div class="task-info">
             <h2>{{.Title}}</h2>
-            <p>{{.Description}}</p>
-            <span class="hours">{{.Hours}} часов на выполнение</span>
+            <span class="hours">{{.Minutes}} минут на выполнение</span>
             <a href="/task/{{ .ID }}" style="text-decoration: none;" class="button12" >Подробнее </a>
         </div>
 
@@ -38,8 +37,9 @@
     {{end}}
 </div>
 </main>
-    <a href="/special-tasks" class="floating-button" >
+    <a href="/special-tasks/1" class="floating-button" >
         <img src="http://127.0.0.1:9000/prog/book.png" alt="Кнопка" width="50" height="50">
+        <span class="badge">{{.SpecialTaskCount}}</span>
     </a>
 </body>
 </html>

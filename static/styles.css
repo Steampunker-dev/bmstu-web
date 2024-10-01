@@ -96,7 +96,7 @@ h1 {
 
 
 .task-item img {
-    width: 150px;
+    width: 550px;
     height: 150px;
     border-radius: 10px;
     margin-right: 20px;
@@ -164,3 +164,68 @@ h1 {
     width: 25px; /* Размер иконки */
     height: 25px;
 }
+.badge {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 5px 10px;
+    font-size: 12px;
+}
+.custom-checkbox {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+/* Создаем стиль для кастомного чекбокса */
+.custom-checkbox-label {
+    display: inline-block;
+    position: relative;
+    padding-left: 30px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 18px;
+    user-select: none;
+}
+
+/* Стиль для квадратного индикатора */
+.custom-checkbox-label::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 25px;
+    height: 25px;
+    background-color: #eee;
+    border-radius: 4px; /* Закругление углов, можно убрать для квадратного вида */
+}
+
+/* Стиль для индикатора, когда чекбокс выбран */
+.custom-checkbox:checked + .custom-checkbox-label::before {
+    background-color: #2196F3; /* Цвет заливки при выборе */
+}
+
+/* Создаем галочку */
+.custom-checkbox-label::after {
+    content: "";
+    position: absolute;
+    left: 8px;
+    top: 3px;
+    width: 6px;
+    height: 12px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
+    opacity: 0;
+}
+
+/* Показываем галочку, когда чекбокс выбран */
+.custom-checkbox:checked + .custom-checkbox-label::after {
+    opacity: 1;
+}
+

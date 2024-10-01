@@ -12,20 +12,22 @@
         <img src="http://127.0.0.1:9000/prog/bmstu_logo.png" alt="Логотип">
     </div>
     <nav class="nav">
-        <a href="/home">Задания</a>
-        <a href="#">Заявки</a>
+        <a href="/tasks">Задания</a>
     </nav>
 </header>
 <main>
     <div class="task-list">
-        <div class="task-item">
-            <img src="{{.task.Image}}" alt="Задание {{.ID}}" width="150" height="150">
-            <div class="task-info">
+        <div class="task-item ">
+            <img src="{{.task.Image}}" alt="Задание {{.ID}}">
+            <div class="task-info sup_class1">
                 <h2>{{.task.Title}}</h2>
                 <p>{{.task.Description}}</p>
-                <span class="hours">{{.task.Hours}} часов на выполнение</span>
-                <a href="/home"  style="text-decoration: none;" class="button12">Вернуться назад</a>
+                <span class="hours">{{.task.Minutes}} минут на выполнение</span>
             </div>
+            <h1 class = "sup_class2">Ответ</h1>
+            <img src="{{.task.Answ}}" alt="Правильный ответ:">
+            <a href="/tasks" class="button12">Вернуться назад</a>
+
         </div>
     </div>
 </main>

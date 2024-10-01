@@ -12,29 +12,32 @@
         <img src="http://127.0.0.1:9000/prog/bmstu_logo.png" alt="Логотип">
     </div>
     <nav class="nav">
-        <a href="/home">Задания</a>
+        <a href="/tasks">Задания</a>
     </nav>
+
 </header>
 <main>
-    <h1>Выбранные Задания</h1>
+    <h1>Заявка для группы {{ .Request.RequestGroup }}</h1>
+    <h1>Дата создания: {{ .Request.DateCreate.Format "02.01.2006" }}</h1>
     <div class="task-list">
-        {{range .tasks}}
+        {{ range $index, $task := .Tasks }}
         <div class="task-item">
-            <img src="{{.Image}}" alt="Задание {{.ID}}" width="150" height="150">
+            <img src="{{ $task.Image }}" alt="Задание {{ $task.ID }}" width="150" height="150">
             <div class="task-info">
-                <h2>{{.Title}}</h2>
-                <p>{{.Description}}</p>
-                <span class="hours">{{.Hours}} часов на выполнение</span>
-                <a href="/task/{{ .ID }}" style="text-decoration: none;" class="button12">Подробнее</a>
-            </div>
-
-            <div class="icon-wrapper">
-                <img class="small-icon" src="http://127.0.0.1:9000/prog/trash.png" alt="Иконка"  >
-
+                <h3>{{ $task.Title }}</h3>
+                <span class="hours">{{ $task.Minutes }} минут на выполнение</span>
+                {{ range $reqTask := $.Request.RequestTasks }}
+                {{ if eq $reqTask.TaskID $task.ID }}
+                <form>
+                    <input type="checkbox" id="checkbox1" disabled {{ if $reqTask.IsRequired }}checked{{ end }} class="custom-checkbox">
+                    <label for="checkbox1" class="custom-checkbox-label">Обязательное</label>
+                </form>
+                {{ end }}
+                {{ end }}
+                <a  href="/task/{{ .ID }}" style="text-decoration: none;" class="button12" >Подробнее </a>
             </div>
         </div>
-
-        {{end}}
+        {{ end }}
     </div>
 </main>
 </body>
