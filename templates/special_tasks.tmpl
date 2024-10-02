@@ -14,7 +14,6 @@
     <nav class="nav">
         <a href="/tasks">Задания</a>
     </nav>
-
 </header>
 <main>
     <h1>Заявка для группы {{ .Request.RequestGroup }}</h1>
@@ -26,15 +25,17 @@
             <div class="task-info">
                 <h3>{{ $task.Title }}</h3>
                 <span class="hours">{{ $task.Minutes }} минут на выполнение</span>
-                {{ range $reqTask := $.Request.RequestTasks }}
-                {{ if eq $reqTask.TaskID $task.ID }}
                 <form>
-                    <input type="checkbox" id="checkbox1" disabled {{ if $reqTask.IsRequired }}checked{{ end }} class="custom-checkbox">
-                    <label for="checkbox1" class="custom-checkbox-label">Обязательное</label>
+
+                    {{ range $isbooltrue, $tmp := $.Request.RequestTasks  }}
+                    {{ $isthisfragmenttrue := eq $isbooltrue $task }}
+                    {{ if $isthisfragmenttrue }}
+                    <input type="checkbox" id="checkbox{{$task.ID}}" disabled {{ if index $.Request.RequestTasks $isbooltrue }}checked{{ end }} class="custom-checkbox">
+                    <label for="checkbox{{$task.ID}}" class="custom-checkbox-label">{{ if index $.Request.RequestTasks $isbooltrue }}Обязательное{{ else }}Необязательное{{ end }}</label>
+                    {{ end }}
+                    {{ end }}
                 </form>
-                {{ end }}
-                {{ end }}
-                <a  href="/task/{{ .ID }}" style="text-decoration: none;" class="button12" >Подробнее </a>
+                <a href="/task/{{ $task.ID }}" style="text-decoration: none;" class="button12">Подробнее</a>
             </div>
         </div>
         {{ end }}

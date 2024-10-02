@@ -18,14 +18,8 @@ type Task struct {
 	Answ        string
 }
 
-type RequestTask struct {
-	TaskID     int
-	RequestID  int
-	IsRequired bool
-}
-
 type Request struct {
-	RequestTasks []RequestTask
+	RequestTasks map[Task]bool
 	DateCreate   time.Time
 	RequestGroup string
 }
@@ -38,10 +32,10 @@ var tasks = []Task{
 
 var requests = []Request{
 	{
-		RequestTasks: []RequestTask{
-			{TaskID: 1, RequestID: 1, IsRequired: true},
-			{TaskID: 2, RequestID: 1, IsRequired: false},
-			{TaskID: 3, RequestID: 1, IsRequired: true},
+		RequestTasks: map[Task]bool{
+			tasks[0]: true,  // Номер 3828 Демидович - обязательная задача
+			tasks[1]: false, // Номер 3805 Демидович - необязательная задача
+			tasks[2]: true,  // Номер 3801 Демидович - обязательная задача
 		},
 		DateCreate:   time.Date(2023, time.October, 3, 0, 0, 0, 0, time.UTC),
 		RequestGroup: "ИУ5-21Б",
@@ -50,23 +44,18 @@ var requests = []Request{
 
 func getTasksForRequest(request Request) []Task {
 	var result []Task
-	for _, reqTask := range request.RequestTasks {
-		for _, task := range tasks {
-			if task.ID == reqTask.TaskID {
-				result = append(result, task)
-			}
-		}
+	for task := range request.RequestTasks {
+		result = append(result, task)
 	}
+	log.Println(result)
+
 	return result
 }
+
 func StartServer() {
 	log.Println("Server start up")
-	var specialTaskIDs = []int{1, 3} // Например, задания с ID 1 и 3
-
-	// Данные для карточек
 
 	r := gin.Default()
-	// Настраиваем маршрут для статических файлов
 	r.Static("/static", "./static")
 
 	r.GET("/tasks", func(c *gin.Context) {
@@ -83,16 +72,7 @@ func StartServer() {
 			filteredTasks = tasks
 		}
 
-		// Подсчитываем количество специальных заданий
-		specialTaskCount := 0
-		for _, task := range tasks {
-			for _, id := range specialTaskIDs {
-				if task.ID == id {
-					specialTaskCount++
-					break
-				}
-			}
-		}
+		specialTaskCount := len(requests[0].RequestTasks)
 
 		c.HTML(http.StatusOK, "index.tmpl", gin.H{
 			"logo1":            "http://127.0.0.1:9000/prog/pudge.png",
@@ -101,6 +81,7 @@ func StartServer() {
 			"SpecialTaskCount": specialTaskCount,
 		})
 	})
+
 	r.GET("/task/:id", func(c *gin.Context) {
 		idStr := c.Param("id")
 		id, err := strconv.Atoi(idStr)
@@ -114,15 +95,18 @@ func StartServer() {
 			"task": task,
 		})
 	})
+
 	r.GET("/special-tasks/:id", func(c *gin.Context) {
 		idStr := c.Param("id")
 		id, err := strconv.Atoi(idStr)
-		if err != nil || id < 1 || id > len(tasks) {
-			c.String(http.StatusNotFound, "Задача не найдена")
+		if err != nil || id < 1 || id > len(requests) {
+			c.String(http.StatusNotFound, "Заявка не найдена")
 			return
 		}
-		request := requests[id-1] // Предполагаем, что у нас одна заявка для примера
+
+		request := requests[id-1]
 		tasksForRequest := getTasksForRequest(request)
+
 		data := struct {
 			Request Request
 			Tasks   []Task
@@ -130,12 +114,10 @@ func StartServer() {
 			Request: request,
 			Tasks:   tasksForRequest,
 		}
-		log.Println(data)
+
 		c.HTML(http.StatusOK, "special_tasks.tmpl", data)
 	})
 
 	r.LoadHTMLGlob("templates/*")
 	r.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
-
-	log.Println("Server down")
 }
