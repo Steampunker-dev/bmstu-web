@@ -93,7 +93,7 @@ func StartServer() {
 			}
 		}
 
-		c.HTML(http.StatusOK, "index.tmpl", gin.H{
+		c.HTML(http.StatusOK, "tasks.tmpl", gin.H{
 			"logo1":            "http://127.0.0.1:9000/prog/pudge.png",
 			"tasks":            filteredTasks,
 			"searchQuery":      searchQuery,
