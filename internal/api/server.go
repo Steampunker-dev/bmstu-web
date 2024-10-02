@@ -61,7 +61,6 @@ func getTasksForRequest(request Request) []Task {
 }
 func StartServer() {
 	log.Println("Server start up")
-	var specialTaskIDs = []int{1, 3} // Например, задания с ID 1 и 3
 
 	// Данные для карточек
 
@@ -86,8 +85,8 @@ func StartServer() {
 		// Подсчитываем количество специальных заданий
 		specialTaskCount := 0
 		for _, task := range tasks {
-			for _, id := range specialTaskIDs {
-				if task.ID == id {
+			for _, id := range requests[0].RequestTasks {
+				if task.ID == id.TaskID {
 					specialTaskCount++
 					break
 				}
