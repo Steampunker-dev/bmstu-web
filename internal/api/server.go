@@ -129,7 +129,6 @@ func StartServer() {
 			Request: request,
 			Tasks:   tasksForRequest,
 		}
-		log.Println(data)
 		c.HTML(http.StatusOK, "special_tasks.tmpl", data)
 	})
 
