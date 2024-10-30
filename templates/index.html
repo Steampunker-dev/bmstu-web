@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задания</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+<header class="header">
+    <div class="logo">
+        <img src="http://127.0.0.1:9000/prog/bmstu_logo.png" alt="Логотип">
+    </div>
+    <nav class="nav">
+        <a href="/">Задания</a>
+    </nav>
+</header>
+<main>
+    <h1>Задания</h1>
+
+    <form class="search-bar" action="/" method="get">
+        <input class="search" type="text" name="minutes_from" placeholder="Длительность от" value="{{ .SearchFrom }}">
+        <input class="search" type="text" name="minutes_to" placeholder="Длительность до" value="{{ .SearchUp }}">
+        <button  class="button12" type="submit" value="Найти">
+            Найти
+            </button>
+    </form>
+
+    <div class="task-list">
+        {{range .tasks}}
+        <div class="task-item">
+            <img src="{{.Image}}" alt="Задание {{.ID}}" width="250" height="150">
+            <div class="task-info">
+                <h2>{{.Title}}</h2>
+                <span class="hours">{{.Minutes}} минут на выполнение</span>
+                <form action="/abouttask/{{ .ID }}" method="GET"  >
+                    <button class="button12" >
+                        Подробнее
+                    </button>
+                </form>
+                <form action="/add/{{.ID}}" method="post">
+                    <button class="button12" >
+                        Добавить
+                    </button>
+                </form>
+            </div>
+
+        </div>
+        {{end}}
+    </div>
+</main>
+<a href="/mytasks/{{.ReqID}}" class="floating-button" >
+    <img src="http://127.0.0.1:9000/prog/book.png" alt="Кнопка" width="50" height="50">
+    <span class="badge">{{.SpecialTaskCount}}</span>
+</a>
+</body>
+</html>

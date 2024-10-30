@@ -1,7 +1,6 @@
 package config
 
 import (
-	"context"
 	"github.com/joho/godotenv"
 	log "github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
@@ -17,7 +16,7 @@ type Config struct {
 }
 
 // NewConfig Создаёт новый объект конфигурации, загружая данные из файла конфигурации
-func NewConfig(ctx context.Context) (*Config, error) {
+func NewConfig() (*Config, error) {
 	var err error
 
 	configName := "config"
@@ -38,6 +37,7 @@ func NewConfig(ctx context.Context) (*Config, error) {
 	}
 
 	cfg := &Config{}
+	// анмаршал конфига
 	err = viper.Unmarshal(cfg)
 	if err != nil {
 		return nil, err

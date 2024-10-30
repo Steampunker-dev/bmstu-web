@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Подробная информация</title>
+    <link rel="stylesheet" href="../static/css/variables.css">
+
+</head>
+<body>
+<header class="header">
+    <div class="logo">
+        <img src="http://127.0.0.1:9000/prog/bmstu_logo.png" alt="Логотип">
+    </div>
+    <nav class="nav">
+        <a href="/">Задания</a>
+    </nav>
+</header>
+<main>
+    <div class="task-list">
+        <div class="task-item ">
+            <img src="{{.task.Image}}" alt="Задание {{.ID}}">
+            <div class="task-info sup_class1">
+                <h2>{{.task.Title}}</h2>
+                <p>{{.task.Description}}</p>
+                <span class="hours">{{.task.Minutes}} минут на выполнение</span>
+            </div>
+            <h1 class = "sup_class2">Ответ</h1>
+            <img src="{{.task.Answ}}" alt="Правильный ответ:">
+            <a href="/" class="button12">Вернуться назад</a>
+
+        </div>
+    </div>
+</main>
+</body>
+</html>

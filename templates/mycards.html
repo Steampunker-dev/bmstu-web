@@ -1,0 +1,81 @@
+
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Специальные Задания</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <style>
+
+        .lesson-container {
+            padding-right: 50px;
+            padding-left: 50px;
+            display: flex;
+            align-items: center;
+            background-color: #f1f8ff;
+            margin: 20px auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .lesson-text {
+            padding: 10px;
+            font-size: 1.5rem;
+            line-height: 1.5;
+            color: #333;
+        }
+
+
+
+
+    </style>
+</head>
+<body>
+<header class="header">
+    <div class="logo">
+        <img src="http://127.0.0.1:9000/prog/bmstu_logo.png" alt="Логотип">
+    </div>
+    <nav class="nav">
+        <a href="/">Задания</a>
+    </nav>
+</header>
+<main>
+    <div class="task-list">
+        <div class="lesson-container">
+            <div class="lesson-text"> Тип занятия</div>
+            <div class="request-info">
+                {{ .LessonType }}
+            </div>
+            <div class="lesson-text"> Дата создания</div>
+            <div class="request-info">
+                {{ .Data }}
+            </div>
+        </div>
+    </div>
+        {{ range $index, $task := .tasks }}
+        <div class="task-item">
+            <img src="{{ $task.Image }}" alt="Задание {{ $task.ID }}" width="150" height="150">
+            <div class="task-info">
+                <h3>{{ $task.Title }}</h3>
+                <span class="hours">{{ $task.Minutes }} минут на выполнение</span>
+                <form style="text-decoration: none; margin-top: 20px">
+                    <input type="checkbox" id="checkbox{{$task.ID}}" disabled class="custom-checkbox">
+                    <label for="checkbox{{$task.ID}}" class="custom-checkbox-label">Необязательное</label>
+                </form>
+                <a href="/abouttask/{{ .ID }}" style="text-decoration: none; margin-top: 10px"  class="button12" >Подробнее</a>
+            </div>
+        </div>
+        {{ end }}
+
+    </div>
+    <form action="/delete/{{ .ReqID }}" method="POST" class="icon-wrapper">
+        <button type="submit" class="delete-btn">
+            <img src="https://www.svgrepo.com/show/488897/delete-2.svg" alt="Удалить" class="delete-icon">
+        </button>
+    </form>
+
+</main>
+</body>
+</html>

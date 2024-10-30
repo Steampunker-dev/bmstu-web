@@ -1,0 +1,5 @@
+DROP TABLE task_items CASCADE;
+DROP TABLE lesson_requests CASCADE;
+DROP TABLE users CASCADE;
+DROP TABLE task_lessons CASCADE;
+

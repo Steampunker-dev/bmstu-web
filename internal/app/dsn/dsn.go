@@ -2,15 +2,20 @@ package dsn
 
 import (
 	"fmt"
+	"github.com/joho/godotenv"
 	"os"
 )
 
 // FromEnv собирает DSN строку из переменных окружения
 func FromEnv() string {
+	if err := godotenv.Load(); err != nil {
+		return ""
+	}
 	host := os.Getenv("DB_HOST")
 	if host == "" {
 		return ""
 	}
+	print("FromEnv")
 
 	port := os.Getenv("DB_PORT")
 	user := os.Getenv("DB_USER")
